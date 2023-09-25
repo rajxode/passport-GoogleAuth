@@ -39,11 +39,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// middleware to check whether user is logged in or not
+const isLoggedIn = (req,res,next) => {
+  // if user is not logged in 
+  if(!req.user){
+    // redirect to loggin page
+    res.redirect('/auth/login');
+  }
+  // else
+  // continue
+  next();
+}
+
+
 // auth routes
 app.use('/auth',auth);
 
 // home route
-app.get('/', (req,res) => {
+// only for logged in user
+app.get('/', isLoggedIn, (req,res) => {
     res.status(200).render('home');
 })
 
