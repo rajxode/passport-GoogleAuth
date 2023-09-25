@@ -15,12 +15,15 @@ passport.serializeUser(function(user, done){
 
 // retrieving user information from the session
 passport.deserializeUser(function(id, done){
+    // find user
     const user = User.findById(id);
     
+    // if no user found
     if (!user) {
         return done(new Error('User not found'));
     }
     
+    // if found 
     done(null, user); // Retrieve the user based on the stored ID
     
 })

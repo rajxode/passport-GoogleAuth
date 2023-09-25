@@ -38,6 +38,7 @@ router.get(
 router.get('/google/callback',
     passport.authenticate('google',{ failureRedirect: '/auth/login' }),
     (req,res) => {
+        // show user's info
         res.send(req.user);
     }
 )
